@@ -46,20 +46,17 @@
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
   .cursor { color: var(--primary); animation: blink 1s step-end infinite; }
 
-  /* Canvas 背景 */
   #bg-code {
     position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
     pointer-events: none; z-index: -1;
   }
-  /* 外渐变：四周渐黑 */
   #vignette-outer {
     position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
     pointer-events: none; z-index: 0;
     background: radial-gradient(circle at center, transparent 50%, #000 100%);
   }
-  /* 内渐变：中心文字背后暗底衬 */
   #vignette-inner {
     position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
@@ -69,6 +66,7 @@
 
   nav, main, footer { position: relative; z-index: 10; }
 
+  /* ── Nav ── */
   #navbar {
     position: fixed; top: 0; left: 0; right: 0; height: 56px;
     display: flex; align-items: center; justify-content: space-between;
@@ -89,11 +87,8 @@
   .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
   .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
-  .nav-lang {
-    background: rgba(99,102,241,0.12); border: 1px solid var(--border-accent);
-    color: var(--accent); padding: 4px 14px; border-radius: 20px;
-    font-size: 11px; letter-spacing: 1px; cursor: pointer;
-  }
+
+  /* ── Hero ── */
   #hero {
     min-height: 100vh; display: flex; flex-direction: column;
     align-items: center; justify-content: center;
@@ -102,7 +97,7 @@
   .hero-badge { margin-bottom: 24px; }
   .hero-title { font-size: clamp(32px,6vw,56px); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 14px; }
   .hero-subtitle { color: var(--text-secondary); font-size: clamp(14px,2vw,18px); margin-bottom: 10px; }
-  .hero-desc { color: var(--text-muted); font-size: 14px; max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+  .hero-desc { color: var(--text-muted); font-size: 14px; max-width: 520px; margin: 0 auto 32px; line-height: 1.8; }
   .hero-cta { display: flex; gap: 12px; justify-content: center; margin-bottom: 56px; flex-wrap: wrap; }
   .btn-primary {
     background: linear-gradient(135deg, var(--primary), var(--primary-end));
@@ -124,17 +119,24 @@
   .stat-number { font-size: 28px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
   .stat-label { color: var(--text-muted); font-size: 11px; letter-spacing: 1px; }
   .stat-divider { width: 1px; height: 36px; background: var(--border); }
-  #about { padding: 80px 40px; max-width: 960px; margin: 0 auto; }
+
+  /* ── Sections ── */
+  section { padding: 80px 40px; }
+  @media (max-width: 640px) { section { padding: 60px 20px; } }
+  .section-header { max-width: 960px; margin: 0 auto 48px; }
   .section-label {
     display: inline-block;
     background: rgba(0,0,0,0.55); color: var(--accent);
     font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
     padding: 6px 18px; border-radius: 6px;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } #about { padding: 60px 20px; } }
+
+  /* ── About ── */
+  #about { border-top: 1px solid var(--border); }
+  .about-grid { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
   .card {
     background: rgba(0,0,0,0.72); border: 1px solid var(--border);
     border-radius: 12px; padding: 24px; transition: border-color 0.25s;
@@ -143,6 +145,7 @@
   .card:hover { border-color: var(--border-accent); }
   .card-label { color: var(--accent); font-size: 10px; letter-spacing: 3px; margin-bottom: 14px; }
   .card p { color: var(--text-secondary); font-size: 14px; line-height: 1.75; }
+  .card p + p { margin-top: 10px; }
   .skills-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
   .skill-tag {
     background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.25);
@@ -150,8 +153,31 @@
     transition: background 0.2s, border-color 0.2s;
   }
   .skill-tag:hover { background: rgba(99,102,241,0.22); border-color: rgba(99,102,241,0.5); }
-  #faq { padding: 80px 40px; max-width: 960px; margin: 0 auto; border-top: 1px solid var(--border); }
-  @media (max-width: 640px) { #faq { padding: 60px 20px; } }
+
+  /* ── Projects ── */
+  #projects { border-top: 1px solid var(--border); }
+  .projects-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+  .project-card {
+    background: rgba(0,0,0,0.72); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px 24px;
+    transition: border-color 0.25s, transform 0.25s;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover { border-color: var(--border-accent); transform: translateY(-4px); }
+  .project-icon { font-size: 32px; margin-bottom: 16px; }
+  .project-title { color: var(--text); font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .project-subtitle { color: var(--text-muted); font-size: 13px; margin-bottom: 14px; }
+  .project-desc { color: var(--text-secondary); font-size: 13px; line-height: 1.7; flex: 1; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .project-tag {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text-muted); padding: 3px 10px; border-radius: 14px; font-size: 11px;
+  }
+
+  /* ── FAQ ── */
+  #faq { border-top: 1px solid var(--border); }
+  .faq-contents { max-width: 960px; margin: 0 auto; }
   .faq-list { display: flex; flex-direction: column; gap: 10px; }
   .faq-item {
     border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
@@ -165,6 +191,8 @@
   .faq-item.open .faq-icon { transform: rotate(45deg); }
   .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
   .faq-answer-inner { padding: 0 20px 16px; color: var(--text-muted); font-size: 13px; line-height: 1.75; }
+
+  /* ── Footer ── */
   #footer {
     border-top: 1px solid var(--border); padding: 32px 40px;
     display: flex; justify-content: space-between; align-items: center;
@@ -189,91 +217,243 @@
     </a>
     <ul class="nav-links">
       <li><a href="#about">关于</a></li>
-      <li><a href="#about">技能</a></li>
+      <li><a href="#projects">作品</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#footer">联系</a></li>
-      <li><span class="nav-lang">EN</span></li>
     </ul>
   </nav>
+
   <main>
+    <!-- ═══════════════ HERO ═══════════════ -->
     <section id="hero">
       <div class="hero-badge"><span class="tag">PORTFOLIO · 2026</span></div>
       <h1 class="hero-title">
         Hi, I'm <span class="gradient-text" id="typed-name"></span><span class="cursor">_</span>
       </h1>
-      <p class="hero-subtitle" id="typed-role">设计师 · 开发者 · 创造者</p>
-      <p class="hero-desc">用代码和设计构建有温度的数字体验，专注于 UI/UX 与前端开发。</p>
+      <p class="hero-subtitle" id="typed-role">数字媒体创作者 · AI 原生设计师</p>
+      <p class="hero-desc">
+        数字媒体艺术专业大三。用 AI 将创意转化为可交互的产品——从 Web 应用到硬件装置，一个人完成从概念到原型的全流程。
+      </p>
       <div class="hero-cta">
-        <a href="#footer" class="btn-primary">联系我 →</a>
-        <a href="#" class="btn-secondary">查看简历</a>
+        <a href="#projects" class="btn-primary">查看作品 ↓</a>
+        <a href="#footer" class="btn-secondary">联系我</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><div class="stat-number gradient-text">3+</div><div class="stat-label">年经验</div></div>
+        <div class="stat"><div class="stat-number gradient-text">10+</div><div class="stat-label">独立项目</div></div>
         <div class="stat-divider"></div>
-        <div class="stat"><div class="stat-number gradient-text">20+</div><div class="stat-label">完成项目</div></div>
+        <div class="stat"><div class="stat-number gradient-text">3</div><div class="stat-label">跨界领域</div></div>
         <div class="stat-divider"></div>
-        <div class="stat"><div class="stat-number gradient-text">∞</div><div class="stat-label">创造热情</div></div>
+        <div class="stat"><div class="stat-number gradient-text">∞</div><div class="stat-label">创作热情</div></div>
       </div>
     </section>
+
+    <!-- ═══════════════ ABOUT ═══════════════ -->
     <section id="about">
-      <p class="section-label">// 关于我 &amp; 技能</p>
+      <div class="section-header">
+        <p class="section-label">// 关于我</p>
+      </div>
       <div class="about-grid">
         <div class="card">
           <div class="card-label">ABOUT ME</div>
-          <p>热爱设计与技术的交叉地带，相信好的产品应该既好看又好用。目前专注于 Web 前端开发和交互设计，喜欢探索新技术和创意表达。</p>
+          <p>
+            数字媒体艺术专业大三在读，相信好的设计应该触动情感而非仅仅取悦眼睛。
+          </p>
+          <p>
+            我不会写代码，但我懂技术。通过 AI 协作，我能将创意概念快速落地为可运行的产品——无论是全栈 Web 应用还是 ESP32 交互装置。一个人在概念、设计和实现之间无缝切换。
+          </p>
         </div>
         <div class="card">
-          <div class="card-label">SKILLS</div>
+          <div class="card-label">WORKFLOW</div>
           <div class="skills-cloud">
-            <span class="skill-tag">React</span><span class="skill-tag">TypeScript</span>
-            <span class="skill-tag">Figma</span><span class="skill-tag">CSS</span>
-            <span class="skill-tag">Node.js</span><span class="skill-tag">UI/UX</span>
-            <span class="skill-tag">HTML5</span><span class="skill-tag">Git</span>
+            <span class="skill-tag">AI 协作开发</span>
+            <span class="skill-tag">交互原型</span>
+            <span class="skill-tag">产品设计</span>
+            <span class="skill-tag">视觉设计</span>
+            <span class="skill-tag">硬件交互</span>
+            <span class="skill-tag">创意编程</span>
+            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">Web 全栈</span>
+            <span class="skill-tag">ESP32</span>
+            <span class="skill-tag">传感器</span>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- ═══════════════ PROJECTS ═══════════════ -->
+    <section id="projects">
+      <div class="section-header">
+        <p class="section-label">// 作品精选</p>
+      </div>
+      <div class="projects-grid">
+
+        <!-- Project 1: 情绪疗愈灯 -->
+        <div class="project-card">
+          <div class="project-icon">💡</div>
+          <div class="project-title">一日四时 · 情绪疗愈灯</div>
+          <div class="project-subtitle">ESP32 硬件交互装置</div>
+          <div class="project-desc">
+            通过 WS2812 24灯环、FSR402 压力传感器、MPU6050 陀螺仪和 TTP223 触摸传感器的多模态融合，模拟清晨→正午→黄昏→深夜四种光影模式。支持压力调光、触控切换、摇晃交互和 SD 卡音频播放，是一盏能感知情绪的灯。
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">ESP32</span>
+            <span class="project-tag">FastLED</span>
+            <span class="project-tag">MPU6050</span>
+            <span class="project-tag">触控交互</span>
+            <span class="project-tag">音频</span>
+          </div>
+        </div>
+
+        <!-- Project 2: 软件需求挖掘 -->
+        <div class="project-card">
+          <div class="project-icon">🔍</div>
+          <div class="project-title">软件需求挖掘平台</div>
+          <div class="project-subtitle">全栈数据系统 · AI 驱动</div>
+          <div class="project-desc">
+            自动采集知乎、微博、GitHub、Hacker News、ProductHunt、HuggingFace 等 10+ 平台的用户讨论，通过 LLM 智能筛选和评分，输出 Top 10 软件需求推荐。含定时调度引擎和可视化仪表盘。从数据采集到 AI 分析的全链路闭环。
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">TypeScript</span>
+            <span class="project-tag">Playwright</span>
+            <span class="project-tag">LLM</span>
+            <span class="project-tag">SQLite</span>
+            <span class="project-tag">Express</span>
+          </div>
+        </div>
+
+        <!-- Project 3: 星空日记 -->
+        <div class="project-card">
+          <div class="project-icon">🌌</div>
+          <div class="project-title">星空日记</div>
+          <div class="project-subtitle">创意交互应用</div>
+          <div class="project-desc">
+            以星空为日记载体的交互式应用。Canvas 粒子引擎渲染动态星空背景，每颗星代表一篇日记。支持天气/时间感知、设备摇一摇、满月特效等沉浸式交互。用 GSAP 驱动的细腻动画传递书写的情感温度。
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">React</span>
+            <span class="project-tag">Canvas</span>
+            <span class="project-tag">GSAP</span>
+            <span class="project-tag">粒子引擎</span>
+            <span class="project-tag">创意交互</span>
+          </div>
+        </div>
+
+        <!-- Project 4: 银山香道 -->
+        <div class="project-card">
+          <div class="project-icon">🏔️</div>
+          <div class="project-title">银山 · 香道</div>
+          <div class="project-subtitle">全栈品牌电商 · 东方美学</div>
+          <div class="project-desc">
+            传统香道文化的现代数字呈现。以水墨质感、留白排版构建东方设计语言，完整的商品展示、购物车、用户认证和后台管理系统。品牌理念贯穿每个像素——"焚香，非为敬神佛，只为与自己安静相对"。
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Next.js 16</span>
+            <span class="project-tag">品牌设计</span>
+            <span class="project-tag">东方美学</span>
+            <span class="project-tag">电商</span>
+            <span class="project-tag">认证系统</span>
+          </div>
+        </div>
+
+        <!-- Project 5: 单词打卡 -->
+        <div class="project-card">
+          <div class="project-icon">📖</div>
+          <div class="project-title">单词打卡</div>
+          <div class="project-subtitle">英语学习工具 · 全栈产品</div>
+          <div class="project-desc">
+            覆盖 CET4 / CET6 / 雅思三大词库的英语学习平台。基于 Supabase 的完整用户系统，支持词表管理、学习进度追踪和 PDF 导出。从数据导入到用户界面的完整产品链路。
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Next.js 16</span>
+            <span class="project-tag">Supabase</span>
+            <span class="project-tag">Tailwind CSS</span>
+            <span class="project-tag">产品设计</span>
+          </div>
+        </div>
+
+        <!-- Project 6: 树洞疗愈 -->
+        <div class="project-card">
+          <div class="project-icon">🌳</div>
+          <div class="project-title">树洞疗愈</div>
+          <div class="project-subtitle">ESP32 音频交互装置</div>
+          <div class="project-desc">
+            基于 DFPlayer Mini 的语音树洞装置。通过音乐和声音提供情绪疗愈体验，将"倾诉"这一人类本能转化为有温度的硬件交互。藏在树洞里的不只是声音，还有被倾听的感觉。
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">ESP32</span>
+            <span class="project-tag">DFPlayer</span>
+            <span class="project-tag">音频交互</span>
+            <span class="project-tag">疗愈设计</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════ FAQ ═══════════════ -->
     <section id="faq">
-      <p class="section-label">// 常见问题</p>
-      <div class="faq-list">
-        <div class="faq-item">
-          <div class="faq-question">
-            <span class="faq-question-text">01 &nbsp; 你目前接受新项目合作吗？</span>
-            <span class="faq-icon">+</span>
-          </div>
-          <div class="faq-answer"><div class="faq-answer-inner">是的，目前开放合作机会。欢迎通过下方联系方式与我取得联系，简单描述你的项目需求即可。</div></div>
+      <div class="faq-contents">
+        <div class="section-header" style="margin-bottom:32px;">
+          <p class="section-label">// 常见问题</p>
         </div>
-        <div class="faq-item">
-          <div class="faq-question">
-            <span class="faq-question-text">02 &nbsp; 你擅长哪类项目？</span>
-            <span class="faq-icon">+</span>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="faq-question-text">01 &nbsp; 你的专业背景是什么？</span>
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              数字媒体艺术专业大三在读。这个专业教会我如何用设计思维去理解人和情感，而技术（无论是我自己操作还是通过 AI）是实现这些设计愿景的手段。
+            </div></div>
           </div>
-          <div class="faq-answer"><div class="faq-answer-inner">专注于 Web 应用、品牌视觉设计和交互原型，尤其擅长将复杂需求转化为简洁直观的用户界面。</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">
-            <span class="faq-question-text">03 &nbsp; 如何联系你？</span>
-            <span class="faq-icon">+</span>
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="faq-question-text">02 &nbsp; 你不会编程，怎么做出这些项目？</span>
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              我的开发方式是用 AI 工具（Claude Code 等）协作完成。我的角色是：定义产品方向、把控设计品质、做出技术选型、拆解复杂需求、测试和迭代。AI 负责代码实现，我负责"做什么"和"为什么这样做"。这种工作流让我一个人就能覆盖从前端到硬件到后端的产品全链路。
+            </div></div>
           </div>
-          <div class="faq-answer"><div class="faq-answer-inner">可以通过页面底部的 Email 链接发送邮件，或在 GitHub / Twitter 上找到我。通常在 1-2 个工作日内回复。</div></div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="faq-question-text">03 &nbsp; 你目前在找什么样的机会？</span>
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              2026 年暑期实习，方向为创意技术 / 交互设计 / 产品设计。特别感兴趣的是：交互装置设计、AI 原生产品设计、智能硬件体验设计——任何让技术和创意交叉的领域。
+            </div></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="faq-question-text">04 &nbsp; 你的设计理念是什么？</span>
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              好的设计应该触动情感。无论是银山香道的东方留白美学，还是情绪疗愈灯的光影呼吸，我都试图在人与物之间建立一种安静的对话。技术是隐形的，情感是显性的。
+            </div></div>
+          </div>
         </div>
       </div>
     </section>
   </main>
+
   <footer id="footer">
-    <span class="footer-copy">© 2026 YAN. · Built with ♥</span>
+    <span class="footer-copy">&copy; 2026 YAN. &mdash; Built with AI &amp; Heart</span>
     <ul class="footer-links">
-      <li><a href="#" target="_blank" rel="noopener">GitHub</a></li>
-      <li><a href="#" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="mailto:hello@example.com">Email</a></li>
+      <li><a href="https://github.com/yanjj539-dot" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="mailto:yanjj539@gmail.com">Gmail</a></li>
+      <li><a href="mailto:2114820895@qq.com">QQ Email</a></li>
     </ul>
   </footer>
+
   <script>
+  /* ── Nav scroll effect ── */
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // 名字打字机（10s 循环）
+  /* ── Name typewriter ── */
   const nameEl = document.getElementById('typed-name');
   const nameText = 'YAN.';
   let nameIdx = 0, nameDeleting = false;
@@ -284,7 +464,6 @@
         nameIdx++;
         setTimeout(typeName, 100);
       } else {
-        // 打完，停留 7.5s 后开始删除
         setTimeout(() => { nameDeleting = true; typeName(); }, 7500);
       }
     } else {
@@ -293,7 +472,6 @@
         nameEl.textContent = nameText.slice(0, nameIdx);
         setTimeout(typeName, 50);
       } else {
-        // 删完，停顿 1s 再开始
         nameDeleting = false;
         setTimeout(typeName, 1000);
       }
@@ -301,8 +479,14 @@
   }
   setTimeout(typeName, 400);
 
-  // 副标题轮播打字机
-  const roles = ['设计师', '开发者', '创造者', 'Designer', 'Developer'];
+  /* ── Role carousel ── */
+  const roles = [
+    '数字媒体创作者',
+    'AI 原生设计师',
+    '交互装置作者',
+    'Creative Technologist',
+    'Product Designer'
+  ];
   let roleIndex = 0, charIndex = 0, deleting = false;
   const roleEl = document.getElementById('typed-role');
   function typeRole() {
@@ -310,16 +494,17 @@
     if (!deleting) {
       roleEl.textContent = current.slice(0, charIndex + 1);
       charIndex++;
-      if (charIndex === current.length) { deleting = true; setTimeout(typeRole, 1800); return; }
+      if (charIndex === current.length) { deleting = true; setTimeout(typeRole, 2000); return; }
     } else {
       roleEl.textContent = current.slice(0, charIndex - 1);
       charIndex--;
       if (charIndex === 0) { deleting = false; roleIndex = (roleIndex + 1) % roles.length; }
     }
-    setTimeout(typeRole, deleting ? 60 : 100);
+    setTimeout(typeRole, deleting ? 50 : 100);
   }
   setTimeout(typeRole, 2200);
 
+  /* ── FAQ accordion ── */
   document.querySelectorAll('.faq-question').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.faq-item');
@@ -336,7 +521,7 @@
     });
   });
 
-  // ── Interactive Code Background ──────────────────────────────────────
+  /* ── Code rain background ── */
   (function() {
     const canvas = document.getElementById('bg-code');
     const ctx = canvas.getContext('2d');
@@ -345,7 +530,7 @@
     const RADIUS = 300;
     const RADIUS_SQ = RADIUS * RADIUS;
     const TTL = 2000;
-    let grid = [], W = 0, H = 0, total = 0;
+    let grid = [], W = 0, H = 0;
     let mx = -500, my = -500, smx = -500, smy = -500;
 
     function resize() {
@@ -364,14 +549,12 @@
           });
         }
       }
-      total = grid.length;
     }
     resize();
     window.addEventListener('resize', resize);
-
     window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
-    function draw(ts) {
+    function draw() {
       ctx.fillStyle = '#000';
       ctx.fillRect(0, 0, W, H);
 
